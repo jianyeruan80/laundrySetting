@@ -1,0 +1,211 @@
+<div class="flex flex-row w100 h100">
+     
+		  <div class="flex-column" style="flex:0 1 220px;">
+		  	      <div class="va-center bc" style="background:#2980b9;color:#fff;height:40px;line-height:35px;padding-right:5px;font-size:20px;">
+			          &nbsp;
+			         <i class="fa fa-user-circle va-center" aria-hidden="true" *ngIf="isStaff=='Staff'"></i>	
+			         <i class="fa fa-users va-center" aria-hidden="true" *ngIf="isStaff=='Role'"></i>
+			         
+			  	     <span  class="va-center">{{isStaff}}</span>
+			  	     <i class="fa fa-plus fl-right"  style="line-height:40px;padding:0 5px" aria-hidden="true" (click)="openUR()"></i>
+		  	      </div>
+		  	      <div class="flex ofy">	
+		  	      
+		  	         <ng-container *ngIf="isStaff=='Role'">
+		  	         <div  [ngClass]="{'staffdiv':true,'select':!!(i==isRole)}"  *ngFor="let item of roles;let i=index;"  (click)="isRole=i;selectRole(item)">
+		  	         <span style="color:#2980b9">{{i+1}}.</span>{{item.name}}
+		  	         </div>
+		  	         </ng-container>
+		  	      
+		  	       <ng-container *ngIf="isStaff=='Staff'">
+		  	            <div *ngFor="let item of users;let i=index;" [ngClass]="{'staffdiv':true,'select':!!(i==isUser)}"  (click)="isUser=i;selectUser(item)" >
+		  	         		<span style="color:#2980b9">{{i+1}}.</span><i class="fa fa-user" style="font-size:16px"  aria-hidden="true"></i>&nbsp;{{item.userName}}
+		  	         	</div>
+		  	         </ng-container>
+		  	   
+		  	
+
+	                 </div>
+	                 
+			 </div> 
+	<div class="flex flex-nocolumn ofy h100">
+
+		 <div class="flex-row w100" style="text-align:center;line-height:0">
+		 	 <input type="radio" class="dsn" name="SUR" value="Staff" id="SU" [(ngModel)]="isStaff" (click)="openUR()">
+	  	      		   
+		 	<label class="flex staff-header"  for="SU" ><h2>Staff</h2></label>
+		 	
+		 	<input type="radio" class="dsn" name="SUR"   value="Role" id="SR" [(ngModel)]="isStaff" (click)="openUR()">
+	  	      		   
+		 	<label class="flex staff-header"  for="SR"><h2>Role</h2></label>	
+		 
+		</div>
+		<div  class="staff-fieldset"  data-title="New/Edit Role" *ngIf="isStaff=='Role'">
+				<form   #f="ngForm"
+			          (ngSubmit)="saveRole()" class="w100 h100">
+				      <div class="form">
+						      	<div style="flex:1;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=role.name  name="name" required />
+					                  <label>Role Name</label> 
+									</div>
+								</div>
+								<div style="flex:1;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=role.description  name="description" />
+					                  <label>Description</label> 
+									</div>
+								</div>
+								<div style="flex:1;height:50px;">
+									<div class="row-other flex-row" style="height:100%;align-items:flex-end;justify-content:center;" >
+						              
+					                  <input type="checkbox"  checked="checked" class="el-opacity" id="RS" [(ngModel)]=role.status name="checkbox">
+						              <label for="RS">Status</label>
+									</div>
+								</div>
+								<div style="flex:1;">
+									<input class="submit store-submit" type="submit" value="Save" [disabled]="!f.valid"	>
+															
+								</div>
+						
+
+				      </div>
+			 </form>     
+	</div>
+
+		<div  class="staff-fieldset"  data-title="Add/Edit User" *ngIf="isStaff=='Staff'">
+					<form   #f="ngForm"
+			          (ngSubmit)="saveUser()" class="w100 h100">
+				      <div class="form">
+						      	<div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.userName  name="name" required />
+					                  <label>User Name</label> 
+									</div>
+								</div>
+								<div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.password  name="descript" required />
+					                  <label>Password</label> 
+									</div>
+								</div>
+								
+									<div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.description  name="descript" />
+					                  <label>Description</label> 
+									</div>
+								</div>
+								<div style="flex:1 1 25%;height:60px;">
+									<div class="row-other" style="line-height:60px;">
+							              <input class="submit store-submit" type="submit" value="Save" [disabled]="!f.valid"	>
+									</div>
+								</div>
+
+
+									<div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.firstName  name="firstName"  />
+					                  <label>First Name</label> 
+									</div>
+								</div>
+								<div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.lastName  name="lastName"  />
+					                  <label>Last Name</label> 
+									</div>
+								</div>
+								
+									<div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.email  name="email"  />
+					                  <label>Email</label> 
+									</div>
+								</div>
+							  <div style="flex:1 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=user.phoneNum1  name="phoneNum1"  />
+					                  <label>Phone </label> 
+									</div>
+								</div>
+								<div style="flex:1 1 40%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]='user.addressInfo["address"]'  name="address"  />
+					                  <label>address </label> 
+									</div>
+								 </div>
+								 <div style="flex:1;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]='user.addressInfo["city"]'  name="city"  />
+					                  <label>city </label> 
+									</div>
+								 </div>
+								 <div style="flex:1;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]='user.addressInfo["state"]'  name="state"  />
+					                  <label>state </label> 
+									</div>
+								 </div>
+								 <div style="flex:1;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]='user.addressInfo["zipCode"]'  name="zipCode"  />
+					                  <label>zipCode </label> 
+									</div>
+								 </div>
+								<div style="flex:1;height:60px;">
+									<div class="row-other flex-row" style="height:50px;align-items:flex-end;justify-content:center;" >
+						              <input type="checkbox" id="US" name="checkbox" [(ngModel)]='user.status' class="el-opacity" checked="checked">
+						              <label for="US">Status</label>
+									</div>
+								</div>
+
+
+
+				      </div>
+			 </form>     
+		</div>
+
+		<div  class="staff-fieldset"  data-title="Current Role" *ngIf="isStaff=='Staff'">
+			<div style="flex:1 1 100%" class="flex-row ">
+	                	  <div style="flex:0 1 20%;padding-left:5px;height:35px;line-height:35px" *ngFor="let item of roles;let i=index;" >
+	                		 <input type="checkbox"  (click)="selectRole(item)"  [checked]="item.description"   [(ngModel)]="item.key" id="{{item._id}}"/><label for="{{item._id}}"><b>{{item.name}}</b></label>
+	                	</div>
+
+	                </div>
+		</div>
+		<div style="margin-left:0.5%;width:99%;font-size:22px;border-bottom:solid #888 2px;font-weight:600;margin-bottom:5px;">
+		Permisson
+		<div style="float:right"><label for="all">All</label> <input type="checkbox" id="all"  [checked]="allSelect"  [(ngModel)]="allSelect" (click)="all($event)" /><label for="all"></label></div></div>
+		<div class="flex flex-nocolumn ofy">
+                 <div *ngFor="let items of perms;let i=index;">
+		                           <div style="flex:0 0 100%;height:40px;
+		                        background:#eee;padding-left:5px;font-size:20px;line-height:40px;border-bottom:solid #888 1px;" class="flex-norow">
+		                	     
+					                		<div class="flex">
+					                				<label for="A{{i}}"><b>{{items._id}}</b></label>
+					                		</div>
+					                		<div style="padding-right:5px;">
+							                		<input type="checkbox" [checked]="items.key" [(ngModel)]="items.key"  (click)="groupAll($event,i)" id="A{{i}}"/>
+
+							                		<label for="A{{i}}"></label>	
+					                		</div>
+				                    
+				                       	
+			                        </div>
+			                        <div class="flex flex-row">
+				                        <div  style="flex:0 1 16.4%;padding-left:5px;height:35px;line-height:35px;background:#fff" *ngFor="let item of items.perms">
+				                        		 <input type="checkbox"  [checked]="item.key"   [(ngModel)]="item.key" id="{{item.value}}"/><label for="{{item.value}}"><b>{{item.subject}}</b></label>
+				                        </div>
+			                        <div>
+
+		                  
+		            
+		         	</div>
+	             	      
+
+	            
+		</div>
+		
+	</div>
+	<hr/>
+</div>

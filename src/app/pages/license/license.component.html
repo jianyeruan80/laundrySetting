@@ -1,0 +1,218 @@
+<div class="flex-column h100 ofh">
+  	<input style="height:50px;width:auto" class="opacity"  #key />
+  	<div class="table-search" data-title="Search License" data-add="+">
+          <div class="add"  (click)="openLicense()">+</div>
+          <div class="form">
+					<div style="flex:0 1 50%;height:60px;">
+									<div class="row">
+
+						              <input placeholder=" "  name="name" />
+					                  <label>Filter by account/email/name/phone</label> 
+									</div>
+					 </div>
+									
+							 <div style="flex:1;" (click)="copy()">
+
+							
+							</div>
+		</div>
+  </div> 
+   <div class="table-header">
+	    	<div style="flex:0 1 50px;">#</div>
+	  		<div style="flex:0 1 120px;">MerchantId</div>
+	  		<div style="flex:0 1 200px;">Store Name</div>
+	  		<div style="flex:0 1 150px;">Contact</div>
+	        <div style="flex:0 1 300px;">Email</div>
+	        <div style="flex:0 1 200px;">Phone</div>
+	        <div style="flex:1">Use</div>
+	        <div style="flex:0 1 45px;"><i class="fa fa-cog" aria-hidden="true"></i></div>
+    </div>
+    <div class="table-flex ofy">
+        <ng-container *ngFor="let items of licenses;let i=index;">
+        <div class="table-body">
+            <div style="flex:0 1 50px;" (click)="items['key']=!items['key']">{{i+1}}</div>
+	        <div style="flex:0 1 120px;">{{items.merchantId}}</div>
+	        <div style="flex:0 1 200px;">{{items.storeName}}</div>
+	        <div style="flex:0 1 150px;">{{items.contact}}</div>
+	        <div style="flex:0 1 300px;">{{items.email}}</div>
+	        <div style="flex:0 1 200px;">{{items.phone}}</div>
+	        
+	        
+	        <div style="flex:1">Use</div>
+	        <div style="flex:0 1 43px;font-size:2rem" (click)="openLicense(items)">+</div>
+         </div>
+         <ng-container *ngIf="!!items['key']">  
+	         <div class="table-body-header" *ngFor="let item of items.licenseKey;let j=index">
+				   <div  *ngIf="j==0" class="table-body-title">
+				   	    <div style="flex:0 1 200px;">PC Key</div>
+					    <div style="flex:0 1 120px;">operator</div>
+				        <div style="flex:0 1 165px;">Create Time</div>
+				        <div style="flex:0 1 80px;">Month</div>
+				        <div style="flex:0 1 80px;">Delay</div>
+				        <div style="flex:0 1 120px;">Key</div>
+				        <div style="flex:0 1 165px;">startDate</div>
+				        <div style="flex:0 1 165px;">expires</div>
+				        <div style="flex:0 1 120px;margin-right:auto">ActiveKey</div>
+				        <div style="flex:0 1 45px;"><i class="fa fa-cog" aria-hidden="true"></i></div>
+				    </div>
+				    <div [ngClass]="{'table-body-body':true,'table-odd':!!(j%2)}" >
+				            <div style="flex:0 1 200px;">{{item.pcKey}}</div>
+						    <div style="flex:0 1 120px;">{{item.operator.user}}</div>
+					        <div style="flex:0 1 165px;">{{item.createdAt.slice(0,19)}}</div>
+					        <div style="flex:0 1 80px;">{{item.month}}</div>
+					        <div style="flex:0 1 80px;">{{item.delay}}</div>
+					        <div style="flex:0 1 120px;" (click)="copy(item.key)">Copy</div>
+					        <div style="flex:0 1 165px;">{{!!item?.startDate?item?.startDate.slice(0,10):''}}</div>
+					        <div style="flex:0 1 165px;">{{!!item?.expires?item?.expires.slice(0,10):''}}</div>
+					        <div style="flex:0 1 120px;" (click)="copy(item.activeKey)">Copy</div>
+					        <div style="flex:0 1 43px;font-size:2rem" (click)="openLicense(items,item.pcKey)">+</div>
+			         </div>
+			        
+	         </div>
+	         </ng-container>  
+	       </ng-container>  
+  </div> 
+   <div class="table-header">
+        <div style="margin-right:auto">test</div> <div>test</div>
+    </div>
+</div> 
+
+
+
+<div class="mask" *ngIf="!!modal">
+</div>
+<div class="mask-flex flex-center" *ngIf="!!modal"> 
+<div style="width:95%;height:95%;background:#fff;border-radius:8px;position:absolute;">
+<i class="fa fa-times mask-close"  (click)="modal=false" aria-hidden="true"></i>
+
+              <form   #f="ngForm"
+				          (ngSubmit)="saveLicense()" class="w100 h100">
+					<div class="form">
+					<div class="form-header" style="height:60px;font-size:30px;line-height:60px">License Info</div>
+				            <input class="submit small-submit" style="margin-right:30px;" type="submit"  value="Save" [disabled]="!f.valid || !!licenseSub.key">
+				            
+				     <div style="flex:0 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " type="text" [(ngModel)]=license.storeName  required name="storeName" />
+					                  <label>Store Name</label> 
+									</div>
+							</div>
+							 <div style="flex:0 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " type="text" [(ngModel)]=license.contact  required name="contact" />
+					                  <label>Contact</label> 
+									</div>
+							</div>
+							 <div style="flex:0 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " type="text" [(ngModel)]=license.phone  required name="phone" />
+					                  <label>Phone</label> 
+									</div>
+							</div>
+							<div style="flex:0 1 25%;line-height:50px;">
+									<div class="row">
+						              <input placeholder=" " type="text" [(ngModel)]=license.email   name="dmail" />
+					                  <label>Email</label> 
+									</div>
+							</div>
+							<div  class="fieldset" data-title="Create License Info">
+							           
+									    	   
+												  <div style="flex:0 1 30%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " required  type="text" [(ngModel)]=licenseSub.pcKey   name="pcKey"/>
+										                  <label>PC Key</label> 
+														</div>
+												  </div>
+													
+												  	<div style="flex:1;height:60px;">
+														<div class="row">
+											              <input placeholder=" " required type="number" step=1 [(ngModel)]=licenseSub.month  name="month"/>
+										                  <label>Month</label> 
+														</div>
+												</div>
+												  	<div style="flex:1;height:60px;">
+														<div class="row">
+											              <input placeholder=" " required type="number" step=1 [(ngModel)]=licenseSub.delay  name="delay"/>
+										                  <label>Delay{{licenseSub.type}}</label> 
+														</div>
+												</div>
+												  	<div style="flex:1;height:60px;">
+														<div class="row va-bottom" style="font-size:50px;">
+													
+											<select style="font-size:1.3rem" class="va-bottom" [(ngModel)]="licenseSub.type" name="type" >
+  														<option *ngFor="let c of ['Normal','Trial']">{{c}}</option>
+											</select>
+
+											             
+
+														</div>
+												</div>
+							</div>		
+
+							<div  class="fieldset" data-title="LicenseKey Info" style="flex-flow:row wrap">
+							           <div style="flex:0 1 150px;height:60px;">
+														<div class="row">
+											              <input placeholder=" " 
+
+											      readonly=""  type="text" [(ngModel)]="licenseSub.merchantId" name="merchantId"  />
+										                  <label>merchantId</label> 
+														</div>
+										</div>
+
+							         <div style="flex:1;height:60px;">
+												<div class="row">
+											 	
+											    <input placeholder=" " 
+
+											      readonly=""  type="text" [(ngModel)]="licenseSub.key"  #originKey name="key"  />
+										                  <label>OriginKey</label> 
+														</div>
+												</div>
+										<div style="flex:0 1 15%;height:60px;">
+														<div class="row">
+											              	<input class="submit small-submit" style="margin-right:30px;" type="button" (click)="copy()"  value="Copy"/>
+														</div>
+										</div>
+
+										
+												  	
+							</div>			
+
+
+							<div  class="fieldset" data-title="Address">
+							           
+									    	  <!--  	<div style="flex:0 1 40%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " type="text" [(ngModel)]='license.addressInfo["address"]'  name="address"/>
+										                  <label>Address</label> 
+														</div>
+												</div>
+												<div style="flex:1;height:60px;">
+														<div class="row">
+											              <input placeholder=" " type="text"  [(ngModel)]='license.addressInfo["city"]' name="city"/>
+										                  <label>City</label> 
+														</div>
+												</div>
+												<div style="flex:1;height:60px;">
+														<div class="row">
+											              <input placeholder=" " type="text"   [(ngModel)]='license.addressInfo["state"]' name="state"/>
+										                  <label>State</label> 
+														</div>
+												</div>
+											      <div style="flex:1;height:60px;">
+													<div class="row">
+										              <input placeholder=" " type="text"  [(ngModel)]='license.addressInfo["zipcode"]'  name="zipcode"/>
+									                  <label>Zip Code</label> 
+													</div>
+												</div> -->
+												
+							         </div>
+							
+				</div>
+				</form>
+
+
+
+      </div>
+</div>

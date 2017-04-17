@@ -1,0 +1,50 @@
+
+/*.input{
+  width:95%;
+  border:none;
+  border-bottom:1px solid red;
+  height:25px;line-height:25px;border:0;border-bottom:solid red 2px;
+  font-size:20px;
+}
+label          {
+  color:#999; 
+  font-size:14px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:0px;
+  transition:0.2s ease all; 
+
+}
+.input:focus ~ label, .input:not(:placeholder-shown) + label {
+  top:-25px;
+  font-size:14px;
+  color: #009688;
+}
+*/
+
+/*.input:not(:placeholder-shown) + label,
+input:focus + label {
+  outline: none;.input:valid ~ label,
+  top:-16px;
+  font-size:1.4rem;
+  
+}*/
+
+label:hover{
+cursor: auto !important; 
+ 
+  
+}
+/*.logo:before{
+  content:"xxx";
+  position:absolute;
+  top:0;
+}*/
+/*label:active{
+  font-size:16px !important;
+  color: #009688;
+  top:5px;
+}
+*/

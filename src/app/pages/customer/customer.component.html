@@ -1,0 +1,217 @@
+
+<div class="flex flex-nocolumn h100">
+<div  class="cusstomer-fieldset"  data-title="Customer Search" style="min-height:85px;">
+				<form   #f="ngForm"
+			          (ngSubmit)="search(1)" class="w100 h100">
+				      <div class="form">
+						      	<div style="flex:1;height:50px;">
+									<div class="row">
+						              <input placeholder=" "  AUTOCOMPLETE="off"  [formControl]="searchInfo"  name="name" />
+					                  <label>Filter by account/email/name/phone</label> 
+									</div>
+								</div>
+									
+								<div style="flex:1;height:50px;">
+									<div class="row-other flex-row" style="height:100%;align-items:flex-end;justify-content:center;" >
+						              
+					                  <input type="checkbox" [checked]='config["searchData"]["status"]'  class="el-opacity" id="RS"
+					                  [(ngModel)]='config["searchData"]["status"]' (ngModelChange)="onChange($event)" name="checkbox">
+						              <label for="RS">Status</label>
+									</div>
+								</div>
+								 </div>
+	</form>     
+</div>
+		<div class="wrapTable" style="flex:0 0 45px">
+					<div class="row header">
+						      <div style="flex:0 0 50px;">
+						        &nbsp;&nbsp;#
+						      </div>
+						      <div class="cell">
+						        Account
+						      </div>
+						      <div class="cell">
+						        First Name
+						      </div>
+						      <div class="cell">
+						        Last Name
+						      </div>
+						      <div class="cell">
+						        Email
+						      </div>
+						      <div class="cell">
+						        Phone
+						      </div>
+				 </div>
+		</div>    
+		<div  class="ofy">
+					   <div class="wrapTable">
+						     <div class="row" *ngFor="let item of customers;let i=index"  (click)="openCustomer(item)">
+									      <div style="flex:0 0 50px;text-align:center">
+									       &nbsp;&nbsp;<b>{{i+1+config["pageOnCount"]*(config["currentPage"]-1)}}</b>
+									      </div>
+									      <div class="cell">
+									        {{item.account}}
+									      </div>
+									      <div class="cell">
+									       {{item.firstName}}
+									      </div>
+									      <div class="cell">
+									        {{item.lastName}}
+									      </div>
+									      <div class="cell">
+									        {{item.email}}
+									      </div>
+									      <div class="cell">
+									        {{item.phoneNum1}}/{{item.phoneNum2}}
+									      </div>
+
+
+							</div>
+		           </div> 
+		 </div>
+		 <div class="wrapTable flex-row flex-center" style="flex:0 0 45px;" >
+						<b>Total:{{config["total"]}}&nbsp;	&nbsp;</b>
+									<ul class="pagination modal-1">
+									  <li><a  (click)="search('prev')" class="prev">&laquo;</a></li>
+									  <li  *ngFor="let item of  (config['totalPages'] ? config['totalPages'].slice(config['startPage'],config['endPage']): []);let i=index">
+									  <a  (click)="search(item)"
+									  [ngClass]="{'active':config['currentPage']==item}" >{{item}}</a></li>
+								
+									  <li><a (click)="search('next')" class="next">&raquo;</a></li>
+									</ul>
+
+		 </div>
+</div>
+
+<div class="mask" *ngIf="!!modal">
+</div>
+<div class="mask-flex flex-center" *ngIf="!!modal"> 
+<div style="width:95%;height:95%;background:#fff;border-radius:8px;position:absolute;">
+<i class="fa fa-times mask-close"  (click)="modal=false" aria-hidden="true"></i>
+
+              <form   #f="ngForm"
+				          (ngSubmit)="save()" class="w100 h100">
+					<div class="form">
+					<div class="form-header" style="height:60px;font-size:30px;line-height:60px">Customer Info</div>
+				            <input class="submit small-submit" style="margin-right:30px;" type="submit"  value="Save" [disabled]="!f.valid">
+				            
+				    
+						 
+						  <div style="flex:0 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=customer.account  readonly="" name="account" />
+					                  <label>Account</label> 
+									</div>
+							</div>
+							 <div style="flex:0 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=customer.firstName  name="firstName" />
+					                  <label>First Name</label> 
+									</div>
+							</div>
+							 <div style="flex:0 1 25%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=customer.lastName name="lastName" />
+					                  <label>Last Name</label> 
+									</div>
+							</div>
+							<div style="flex:0 1 25%;line-height:50px;">
+									<div class="row-other flex-row" style="height:100%;align-items:flex-end;justify-content:center;" >
+						              <input type="checkbox"  id="RSA" [(ngModel)]=customer.status name="status">
+						              <label for="RSA">Status</label>
+									</div>
+							</div>
+							
+							<div  class="fieldset" data-title="Contact">
+							           
+									    	   	<div style="flex:0 1 14.2%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " [(ngModel)]=customer.contact  name="contact"/>
+										                  <label>Contact</label> 
+														</div>
+												</div>
+												<div style="flex:0 1 14.2%;height:60px;">
+														<div class="row">
+											              <input placeholder=" "  [(ngModel)]=customer.email name="email"/>
+										                  <label>email</label> 
+														</div>
+												</div>
+												<div style="flex:0 1 14.2%;height:60px;">
+														<div class="row">
+											              <input placeholder=" "   [(ngModel)]=customer.phoneNum1 name="phoneNum1"/>
+										                  <label>phone Num1</label> 
+														</div>
+												</div>
+											      <div style="flex:0 1 14.2%;height:60px;">
+													<div class="row">
+										              <input placeholder=" "  [(ngModel)]=customer.phoneNum2  name="phoneNum2"/>
+									                  <label>phone Num2</label> 
+													</div>
+												</div>
+														 <div style="flex:0 1 14.2%;height:60px;">
+													<div class="row">
+										              <input placeholder=" " [(ngModel)]=customer.fax name="fax" />
+									                  <label>fax</label> 
+													</div>
+											</div>
+											  	<div style="flex:0 1 14.2%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " [(ngModel)]=customer.facebook  name="contact"/>
+										                  <label>facebook</label> 
+														</div>
+												</div>
+												<div style="flex:0 1 14.2%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " [(ngModel)]=customer.wechat  name="contact"/>
+										                  <label>wechat</label> 
+														</div>
+												</div>
+							         </div>
+							 <!-- 
+							      <div  class="fieldset flex-row" data-title="Address" >
+							           
+									    	  <div style="flex:0 1 100%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " [(ngModel)]=store.addressInfo.address name="address"/>
+										                  <label>Address</label> 
+														</div>
+												</div>
+											<div style="flex:0 1 33.3%;height:60px;">
+														<div class="row">
+											              <input placeholder=" " [(ngModel)]=store.addressInfo.city name="city"/>
+										                  <label>city</label> 
+														</div>
+												</div>
+											     <div style="flex:0 1 33.3%;height:60px;" >
+													<div class="row">
+										              <input placeholder=" " [(ngModel)]=store.addressInfo.state name="state"/>
+									                  <label>state</label> 
+													</div>
+												</div>
+												<div style="flex:0 1 33.3%;height:60px;">
+													<div class="row">
+										              <input placeholder=" " [(ngModel)]=store.addressInfo.zipCode name="zipCode"/>
+									                  <label>Zip Code</label> 
+													</div>
+												</div>
+												  	<div style="flex:0 1 100%;height:60px;">
+														<div class="row">
+											              <input placeholder=" "  [(ngModel)]=store.addressInfo.description name="description"/>
+										                  <label>description</label> 
+														</div>
+												</div>
+							         </div>   
+							 -->
+							   
+						
+				</div>
+				</form>
+
+
+
+      </div>
+</div>
+  
+
+	

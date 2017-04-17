@@ -1,0 +1,101 @@
+
+<form   #f="ngForm"
+          (ngSubmit)="save()" class="w100 h100">
+	<div class="form">
+            <input class="submit small-submit" type="submit" value="Save" [disabled]="!f.valid">
+            <input type="file" style="display:none" name="logo" #uploadPic (change)="upload($event)"/>
+     <div class="form-header  va-center"	>
+		   	 <img class="img va-center" src="{{appGlobal.picUrl}}{{store.logo}}" width="50" height="50" (click)="uploadPicture()"  #showPic  style="border-radius:6px;" />
+	</div>
+		 
+		  <div style="flex:0 1 33.3%;height:60px;">
+					<div class="row">
+		              <input placeholder=" " [(ngModel)]=store.name  name="name" required />
+	                  <label>Store Name</label> 
+					</div>
+			</div>
+			 <div style="flex:0 1 33.3%;height:60px;">
+					<div class="row">
+		              <input placeholder=" " [(ngModel)]=store.merchantId readonly="" name="merchantId" />
+	                  <label>MerchantId</label> 
+					</div>
+			</div>
+			 <div style="flex:0 1 33.3%;height:60px;">
+					<div class="row">
+		              <input placeholder=" " [(ngModel)]=store.qrcUrl readonly="" name="qrcurl" />
+	                  <label>QRC</label> 
+					</div>
+			</div>
+			
+			<div  class="fieldset" data-title="Contact">
+			           
+					    	   	<div style="flex:0 1 20%;height:60px;">
+										<div class="row">
+							              <input placeholder=" " [(ngModel)]=store.contact  name="contact" required/>
+						                  <label>Contact</label> 
+										</div>
+								</div>
+								<div style="flex:0 1 20%;height:60px;">
+										<div class="row">
+							              <input placeholder=" "  [(ngModel)]=store.email name="email" required/>
+						                  <label>email</label> 
+										</div>
+								</div>
+								<div style="flex:0 1 20%;height:60px;">
+										<div class="row">
+							              <input placeholder=" "   [(ngModel)]=store.phoneNum1 name="phoneNum1" required/>
+						                  <label>phone Num1</label> 
+										</div>
+								</div>
+							      <div style="flex:0 1 20%;height:60px;">
+									<div class="row">
+						              <input placeholder=" "  [(ngModel)]=store.phoneNum2  name="phoneNum2"/>
+					                  <label>phone Num2</label> 
+									</div>
+								</div>
+										 <div style="flex:0 1 20%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=store.fax name="fax" />
+					                  <label>fax</label> 
+									</div>
+							</div>
+			         </div>
+			 
+			      <div  class="fieldset flex-row" data-title="Address" >
+			           
+					    	   	<div style="flex:0 1 100%;height:60px;">
+										<div class="row">
+							              <input placeholder=" " [(ngModel)]=store.addressInfo.address name="address"/>
+						                  <label>Address</label> 
+										</div>
+								</div>
+							<div style="flex:0 1 33.3%;height:60px;">
+										<div class="row">
+							              <input placeholder=" " [(ngModel)]=store.addressInfo.city name="city"/>
+						                  <label>city</label> 
+										</div>
+								</div>
+							     <div style="flex:0 1 33.3%;height:60px;" >
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=store.addressInfo.state name="state"/>
+					                  <label>state</label> 
+									</div>
+								</div>
+								<div style="flex:0 1 33.3%;height:60px;">
+									<div class="row">
+						              <input placeholder=" " [(ngModel)]=store.addressInfo.zipCode name="zipCode"/>
+					                  <label>Zip Code</label> 
+									</div>
+								</div>
+								  	<div style="flex:0 1 100%;height:60px;">
+										<div class="row">
+							              <input placeholder=" "  [(ngModel)]=store.addressInfo.description name="description"/>
+						                  <label>description</label> 
+										</div>
+								</div>
+			         </div>   
+			
+			   
+		
+</div>
+</form>

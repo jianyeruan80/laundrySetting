@@ -1,0 +1,41 @@
+<div class="bc flex-norow h100 w100">
+	  <input  id="left" type="checkbox" class="left-bar" />
+	  <div class="left flex-column" >
+	  	      <div class="va-center bc" style="height:50px;line-height:40px;padding-right:5px;font-size:30px">
+		          	<img  class="va-center logo"  src="{{appGlobal.picUrl}}{{appGlobal.storeInfo.logo}}" width=30 />
+		  	      	<span  class="va-center">{{appGlobal.storeInfo.name}}</span>
+	  	      </div>
+	  	      <div class="flex ofy">	<!--  | filter:['objectToArray'] -->
+	  	      <div *ngFor="let items of appGlobal.userInfo.permsList;let i=index;" class="nav">
+	  	      	<div class="nav-header">
+	  	      	{{items.key}}   
+	  	      	<i class="fa fa-bars" aria-hidden="true" style="float:right"></i>
+	  	      	</div>
+	  	      		  <ng-container *ngFor="let item of items.value;let j=index">
+	  	      		   
+	  	      		   <input type="radio" id="{{item.subject}}"  value="{{item.subject}}" name="Item" 
+	  	      		   [(ngModel)]="appGlobal.navSelect"  checked class="radio-hide" (click)="linkTo(item)">
+		  	      	   <label   for="{{item.subject}}" class="nav-content">
+		  	      				{{item.subject}}
+		  	      				<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+		  	      		</label>
+
+		  	      		</ng-container>
+
+                 </div>
+
+		  	  </div>    
+ </div>
+
+<div  class="wrap h100 flex-nocolumn bp0 w100">
+      <app-header></app-header>
+      <div  class="content ofy">
+      <router-outlet></router-outlet> 
+      </div>
+       <!--  <app-footer></app-footer> -->
+</div>
+<!--   <input  id="right" type="checkbox" class="right-bar" />
+  <div  class="right ">right</div> -->
+  
+</div>
+

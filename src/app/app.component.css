@@ -1,0 +1,26 @@
+/*@import url(https://fonts.googleapis.com/css?family=Ubuntu:500);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono);
+
+body {
+  font-family: "Ubuntu";
+}*/
+/*//align-items:center;*/
+.loading{
+  z-index:99999;display:flex;width:100%;position:absolute;justify-content:center;
+  text-align: center;color:#fff;animation:animation-loading 2.5s ease-in-out infinite;
+  bottom:10%;
+}
+.loading img{
+  width:65px;
+  content:url('http://pngimg.com/uploads/car_logo/car_logo_PNG1667.png');
+}
+@-webkit-keyframes animation-loading {
+    0% {opacity: 0}
+    60%{opacity: 0.6}
+    100% {opacity: 1;}
+}
+@keyframes animation-loading {
+    0% {opacity: 0}
+    60%{opacity: 0.6}
+    100% {opacity: 1;}
+}

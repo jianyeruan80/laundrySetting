@@ -1,0 +1,43 @@
+
+/*.nav{
+	border-bottom:solid red 1px;
+}
+*/.nav-header{
+background-color:#5DBA9D;line-height:50px;height:50px;font-size:35px;padding:0 5px;
+color:#fff;
+}
+.nav-header i{
+	float: right;line-height:50px;font-size:25px;
+}
+
+.nav-content{
+line-height:45px;height:45px;font-size:25px;padding:0 5px 0 10px;
+display:block;
+}
+.nav-content:nth-of-type(odd){
+background:#eee !important;
+}
+.nav-content i{
+	float: right;line-height:45px;
+}
+.radio-hide{
+	display:none;
+}
+.radio-hide:checked  + label{
+	background:#666 !important;
+	color:#FFFF00  !important;
+	font-weight:600;
+}
+
+/*.xxx{
+	background:red;
+}
+.xxx:nth-child(odd){
+background:#eee !important;
+}
+.vv{
+	background:red;
+}
+.vv:nth-child(odd){
+	background:#eee !important;
+}*/

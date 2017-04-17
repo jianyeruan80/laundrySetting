@@ -1,0 +1,78 @@
+<div class="setting">
+		<div class="s-left">
+				<div class="sheader" (click)="add()">
+				{{settingCf[cfSelect].key}}
+				<i class="fa fa-plus fl-right" *ngIf="cfSelect==1" style="line-height:40px;padding:0 5px" aria-hidden="true" (click)="openUR()"></i>
+					
+				</div>
+				<div class="scontent ofy">
+						<div  *ngFor="let item of settingList | filter:['=',settingType];let i=index;" [ngClass]="{'s-select':i==isSelect}" (click)="isSelect=i;select(item)">
+
+							<div style="margin-right:auto;">{{item.group}}</div><div><i class="fa fa-angle-double-right" aria-hidden="true" style="line-height:40px"></i> </div>
+						</div>
+					
+				
+			</div>		
+		</div>
+
+		<div class="s-right" >
+		<div style="width:100%;flex: 0 0 75px;display:flex;flex-flow:row wrap;text-align:center;background:#ddd">
+			<div  style="flex:1 1 50%;height:40px;line-height:40px" *ngFor="let item of settingCf;let i=index;" (click)="cfSelect=i"  [ngClass]="{'s-select':i==cfSelect}" (click)="cfSelect=i;cfSelectSub=0;settingType['type']='Global';isSelect=0;select()">
+				{{item.value}}
+			</div>
+			<div  style="flex:1;height:35px;line-height:35px;border-right:solid #fff 1px;border-top:solid #fff 1px;" *ngFor="let item of settingCf[cfSelect].values;let i=index;" [ngClass]="{'s-select':i==cfSelectSub}" (click)="cfSelectSub=i;isSelect=0;settingType['type']=item.type;select()">
+				{{item.value}}
+			</div>
+			
+		</div>
+		
+		<form   #f="ngForm"
+          (ngSubmit)="save()" class="w100 h100" style="flex:1;">
+           <div style="position:relative;width:100%;text-align:right;">
+	          <input class="submit s-submit" type="button" value="Delete" (click)="del()" *ngIf="cfSelect==1 && !!settingForm['_id']">
+	          <input class="submit s-submit" type="submit" value="Save" [disabled]="!f.valid">
+           </div>
+          <!--  
+            -->
+					<div  class="s-fieldset" *ngFor="let item of settingForm.settingInfo;let i=index;">
+			           			<div class="sheader">{{settingForm.group}}</div>
+			      				
+					    	   	<div style="flex:0 1 50%;height:60px;" *ngIf="cfSelect==1">
+											<div class="row">
+								              <input placeholder=" " [(ngModel)]=settingForm.group  name="z{{i}}" required/>
+							                  <label>Name</label> 
+											</div></div>
+					    	   	<div style="flex:0 1 50%;height:60px;"  *ngFor="let v of item.values;let j=index;">
+											<div class="row" *ngIf="v.type=='input'">
+								              <input placeholder=" " [(ngModel)]=v.value  name="a{{i}}{{j}}" required/>
+							                  <label>{{v.name}}</label> 
+											</div>
+										
+										<div  *ngIf="v.type=='checkbox'" style="font-size:60px;padding-left:8px">
+								          
+								          <input  type="checkbox"  checked="checked"  id="b{{i}}{{j}}" [(ngModel)]=v.value name="b{{i}}{{j}}">
+							              <label for="b{{i}}{{j}}" style="font-size:1.3rem">{{v.name}}
+
+							              </label>
+
+	                                     </div>
+
+											<div *ngIf="v.type=='radio'" style="font-size:60px;padding-left:8px">
+											  <label style="font-size:1.2rem">{{v.name}}</label> 
+								             <select [(ngModel)]="v.select" style="height:50px;line-height:30px;font-size:1.3rem" name="c{{i}}{{j}}"> 
+	    										<option *ngFor="let obj of v.value;let i=index;"  
+	    										  [attr.value]='obj'>{{obj}}</option>
+										   </select> 
+							                
+											</div>
+											
+							 	</div>
+
+							
+							</div>
+					
+					</form> 
+	
+							
+		</div>
+</div>
